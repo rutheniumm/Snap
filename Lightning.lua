@@ -289,8 +289,4 @@ local LightningBolt = class() do
 	end
 end
 
-return setmetatable({ new = LightningBolt }, {
-	__call = function (_, ...)
-		return LightningBolt(...)
-	end
-})
+return {new = function(...) return LightningBolt(...) end}
