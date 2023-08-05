@@ -634,7 +634,6 @@ RunService.PreSimulation:Connect(function()
 					ThisBranch:_UpdateGeometry(BPart, PercentAlongBolt, TimePassed, thicknessNoise, PrevPoint, NextPoint)
 
 					ThisBranch:_UpdateColor(BPart, PercentAlongBolt, TimePassed)
-                                        ThisBranch._CurrentPart(NextPoint)
 					PrevPoint, bezier0 = NextPoint, bezier1
 				end
 			else
