@@ -362,7 +362,7 @@ LightningBolt.__index = LightningBolt
 	local NewBolt = LightningBolt.new(A1, A2, 40)
 --]]
 
-function LightningBolt.new(Attachment0, Attachment1, PartCount)
+function LightningBolt.new(Attachment0, Attachment1, PartCount, CurrentPartChanged)
 	local self = setmetatable({}, LightningBolt)
 	PartCount = PartCount or 30
 
@@ -441,6 +441,7 @@ function LightningBolt.new(Attachment0, Attachment1, PartCount)
 	self._StartT = clock()
 	self._RanNum = math.random() * 100
 	self._RefIndex = #ActiveBranches + 1
+	self._CurrentPart = CurrentPartChanged or function() end
 
 	ActiveBranches[self._RefIndex] = self
 
@@ -631,7 +632,7 @@ RunService.PreSimulation:Connect(function()
 					ThisBranch:_UpdateGeometry(BPart, PercentAlongBolt, TimePassed, thicknessNoise, PrevPoint, NextPoint)
 
 					ThisBranch:_UpdateColor(BPart, PercentAlongBolt, TimePassed)
-
+                                        ThisBranch._CurrentPart(BPart)
 					PrevPoint, bezier0 = NextPoint, bezier1
 				end
 			else
