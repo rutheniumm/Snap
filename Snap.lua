@@ -253,7 +253,7 @@ end)
 function R.OnServerInvoke(Player, Request, Hit, Method) if Player ~= owner then return end local Params = RaycastParams.new(); Params.FilterType = Enum.RaycastFilterType.Exclude; Params.FilterDescendantsInstances = {owner.Character, script, workspace:FindFirstChild("Base")};
 	if Request == "Snap" then local RaycastResult = workspace:Raycast(owner.Character["HumanoidRootPart"].Position, (Hit.Position - owner.Character["HumanoidRootPart"].Position).Unit * 10000000, Params); if RaycastResult then FX:Play() if Methods[Method] then Methods[Method](RaycastResult.Instance, RaycastResult.Position, RaycastResult.Normal) end; local SFM = Instance.new("StringValue"); SFM.Name = "toolanim"; SFM.Value = "Slash" SFM.Parent = Snap end elseif Request == "GetMethods" then local FM = {} for i, v in pairs(Methods) do table.insert(FM, i) end return FM end
 end
-NLS([[local CurrentMethod = 1; local R = owner.Backpack:WaitForChild("S", 100) ; local Methods = R:InvokeServer("GetMethods") local Snap = game:GetService("CollectionService"):GetTagged(`SnapTool..{owner.UserId}`)[1] Snap.Activated:Connect(function() R:InvokeServer("Snap", owner:GetMouse().Hit, Methods[CurrentMethod]) end);
+NLS([[local CurrentMethod = 1; local R = owner.Backpack:WaitForChild("S", 100) ; local Methods = R:InvokeServer("GetMethods") local Snap = game:GetService("CollectionService"):GetTagged(`SnapTool{owner.UserId}`)[1] Snap.Activated:Connect(function() R:InvokeServer("Snap", owner:GetMouse().Hit, Methods[CurrentMethod]) end);
 local UIS = game:GetService("UserInputService")
 local CountMethod = 1
 local GUI = Instance.new("ScreenGui", owner.PlayerGui);
